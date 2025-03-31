@@ -61,3 +61,10 @@ This function counts the number of ways to partition A and B at the same indices
 #### Space Complexity:
 1. The dp array requires O(n) space.
 Thus, the space complexity is O(n).
+
+### Summary of Complexity Analysis
+| Function | Time Complexity | Space Complexity |
+|----------|---------------|----------------|
+| `count_partitions(A)` | **O(n²)** | **O(n)** |
+| `can_partition_same_indices(A, B)` | **O(n²)** | **O(n)** |
+| `count_partition_same_indices(A, B)` | **O(n²)** | **O(n)** |
