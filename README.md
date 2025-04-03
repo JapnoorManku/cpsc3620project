@@ -70,7 +70,7 @@ Thus, the space complexity is O(n).
 | `count_partition_same_indices(A, B)` | **O(n²)** | **O(n)** |
 
 ## 4. Proof of Correction by using Induction
-### **1️ Proof for `count_partitions(A)`**
+### ** Proof for `count_partitions(A)`**
 
 **Claim:** The function correctly computes the number of ways to partition `A` into valid words.
 
@@ -89,7 +89,7 @@ Thus, the space complexity is O(n).
 
 ---
 
-### **2️ Proof for `can_partition_same(A, B)`**
+### ** Proof for `can_partition_same(A, B)`**
 
 **Claim:** The function correctly determines whether `A` and `B` can be partitioned at the same indices.
 
@@ -109,7 +109,7 @@ Thus, the space complexity is O(n).
 
 ---
 
-### **3️ Proof for `count_common_partitions(A, B)`**
+### ** Proof for `count_common_partitions(A, B)`**
 
 **Claim:** The function correctly computes the number of ways `A` and `B` can be partitioned at the same indices.
 
