@@ -68,3 +68,73 @@ Thus, the space complexity is O(n).
 | `count_partitions(A)` | **O(n²)** | **O(n)** |
 | `can_partition_same_indices(A, B)` | **O(n²)** | **O(n)** |
 | `count_partition_same_indices(A, B)` | **O(n²)** | **O(n)** |
+
+## 4. Proof of Correction by using Induction
+### **1️⃣ Proof for `count_partitions(A)`**
+
+**Claim:** The function correctly computes the number of ways to partition `A` into valid words.
+
+#### **Proof by Induction on `n` (Length of `A`)**
+- **Base Case (`n = 0`)**:  
+  - The empty string has **one valid partition** (doing nothing).  
+  - `dp[0] = 1`, which is correct.
+
+- **Inductive Step:**  
+  - Suppose the function correctly counts partitions for all strings up to length `n-1`.  
+  - For a string of length `n`, the algorithm checks all possible prefixes `A[j-1:i]` (where `j ≤ i`) and sums valid partitions.
+  - If `A[j-1:i]` is a valid word, we add `dp[j-1]` to `dp[i]`, ensuring that `dp[i]` correctly accumulates all valid segmentations.
+
+- **Conclusion:**  
+  By induction, `dp[n]` correctly computes the number of ways to partition `A`.
+
+---
+
+### **2️⃣ Proof for `can_partition_same(A, B)`**
+
+**Claim:** The function correctly determines whether `A` and `B` can be partitioned at the same indices.
+
+#### **Correctness Argument**
+- **Base Case (`n = 0`)**:  
+  - The empty strings trivially have a matching partition.
+  - `dp[0] = True`, which is correct.
+
+- **General Case:**  
+  - The function iterates through `A` and `B`, checking if both can be partitioned into valid words at the same indices.
+  - If `A[j-1:i]` and `B[j-1:i]` are both words, we propagate `dp[j-1] → dp[i] = True`.
+  - This ensures `dp[i] = True` if and only if `A[0:i]` and `B[0:i]` share a valid segmentation.
+
+- **Conclusion:**  
+  - If a valid common partition exists, `dp[n] = True`.  
+  - Otherwise, `dp[n] = False`, which is correct.
+
+---
+
+### **3️⃣ Proof for `count_common_partitions(A, B)`**
+
+**Claim:** The function correctly computes the number of ways `A` and `B` can be partitioned at the same indices.
+
+#### **Proof Using Dynamic Programming and Induction**
+- **Base Case (`n = 0`)**:  
+  - There is **one valid partition** for empty strings.  
+  - `dp[0] = 1`, which is correct.
+
+- **Inductive Hypothesis:**  
+  - Assume for all strings up to length `n-1`, the function correctly counts the number of common partitions.
+
+- **Inductive Step:**  
+  - The function iterates through `A` and `B`, checking all substrings `A[j-1:i]` and `B[j-1:i]`.  
+  - If both substrings are valid words, we sum `dp[j-1] → dp[i]`, ensuring that `dp[i]` correctly accumulates valid common segmentations.
+
+- **Conclusion:**  
+  By induction, `dp[n]` correctly computes the number of ways `A` and `B` can be partitioned at the same indices.
+
+---
+
+### **Final Conclusion**
+Each algorithm follows **dynamic programming principles**, ensuring correctness through:
+- **Optimal substructure** (Each problem depends on subproblems).
+- **Overlapping subproblems** (Previously computed values are reused).
+- **Inductive reasoning** (Base case is correct, and correctness extends to larger cases).
+
+Thus, all algorithms are **provably correct**.
+
