@@ -9,7 +9,7 @@ This repository provides **Dynamic Programming (DP)** solutions for three varian
 We assume access to a function `IsWord(s)`, which checks whether a given substring `s` is a valid word.
 
 ---
-## Problem Statement
+##2. Problem Statement
 
 Assume you have a subroutine `IW` that takes an array (or substring) of characters as input and returns `T` (true) if and only if that string is a valid word. Using this subroutine, we address the following three variants:
 
@@ -40,22 +40,6 @@ Assume you have a subroutine `IW` that takes an array (or substring) of characte
 - **Input:** Two arrays `A[1 .. n]` and `B[1 .. n]` of characters.
 - **Task:** Compute the number of different ways that `A` and `B` can be partitioned into words such that the partitions occur at the same indices in both strings.
 - **Objective:** Similar to part (a), but the count is restricted to only those partitions where both strings have a valid word at every segment defined by the same indices.
-
-## Efficient Algorithm Design
-
-For all variants, a **dynamic programming** approach can be used to solve the problems efficiently. The key ideas include:
-
-- **DP Array Definition:**  
-  For variant (a), define `dp[i]` as the number of valid partitions of the prefix `A[1 .. i]`.
-  
-- **Transition:**  
-  For each possible ending position `i`, consider all possible starting positions `j` (where `1 ≤ j ≤ i`). If `A[j..i]` is a valid word (i.e., `IW(A[j..i])` returns true), then add the number of partitions ending at `j-1` (`dp[j-1]`) to `dp[i]`.
-  
-- **Handling Two Strings:**  
-  For variants (b) and (c), a similar approach is used, but you must ensure that the substring from both `A` and `B` (using the same indices) are valid words. This may involve a combined check:  
-  ```python
-  if IW(A[j..i]) and IW(B[j..i]):
-      # update dp accordingly
 
 ---
 ## 3. Complexity analysis
