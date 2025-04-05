@@ -9,25 +9,54 @@ This repository provides **Dynamic Programming (DP)** solutions for three varian
 We assume access to a function `IsWord(s)`, which checks whether a given substring `s` is a valid word.
 
 ---
+## Problem Statement
 
-## 2. Problem Statements and Solutions
+Assume you have a subroutine `IW` that takes an array (or substring) of characters as input and returns `T` (true) if and only if that string is a valid word. Using this subroutine, we address the following three variants:
 
-### (a) Counting the Number of Ways to Partition a String into Words
-#### Problem Description
-Given an array `A[1..n]` of characters, determine the number of ways to segment `A` into valid words.  
-For example, given `"ARTISTOIL"`, the valid segmentations are:
-1. `"ARTIST · OIL"`
-2. `"ART · IS · TOIL"`
+### (a) Counting Partitions into Words
+- **Input:** An array `A[1 .. n]` of characters.
+- **Task:** Compute the number of different ways to partition `A` into valid words.
+- **Example:**  
+  For the string `ARTISTOIL`, there are 2 valid partitions:
+  - `ARTIST` · `OIL`
+  - `ART` · `IS` · `TOIL`
+- **Objective:** Develop an efficient algorithm that minimizes calls to `IW` while ensuring that all possible valid partitions are counted.
 
-Thus, the algorithm should return `2`.
+### (b) Partitioning Two Strings at the Same Indices
+- **Input:** Two arrays `A[1 .. n]` and `B[1 .. n]` of characters.
+- **Task:** Decide whether there exists a way to partition both `A` and `B` into words such that the partition indices (i.e., the boundaries between words) are exactly the same in both strings.
+- **Example:**  
+  Given:
+  - `A = BOTHEARTHANDSATURNSPIN`
+  - `B = PINSTARTRAPSANDRAGSLAP`
+  
+  A valid partitioning is:
+  - For `A`: `BOT` · `HEART` · `HAND` · `SAT` · `URNS` · `PIN`
+  - For `B`: `PIN` · `START` · `RAPS` · `AND` · `RAGS` · `LAP`
+  
+- **Objective:** The algorithm should minimize calls to `IW` by verifying if substrings (defined by potential partition boundaries) are valid words in both strings simultaneously.
 
-#### Approach
-We use **Dynamic Programming (DP)** to efficiently count the number of partitions:
-- Define `dp[i]` as the number of ways to segment `A[0..i]` into valid words.
-- Iterate over possible ending positions and check whether the substring `A[j:i]` is a valid word.
-- Use the recurrence relation:  
-  ```math
-  dp[i] = ∑ dp[j]  if A[j:i] is a valid word
+### (c) Counting Common Partitionings
+- **Input:** Two arrays `A[1 .. n]` and `B[1 .. n]` of characters.
+- **Task:** Compute the number of different ways that `A` and `B` can be partitioned into words such that the partitions occur at the same indices in both strings.
+- **Objective:** Similar to part (a), but the count is restricted to only those partitions where both strings have a valid word at every segment defined by the same indices.
+
+## Efficient Algorithm Design
+
+For all variants, a **dynamic programming** approach can be used to solve the problems efficiently. The key ideas include:
+
+- **DP Array Definition:**  
+  For variant (a), define `dp[i]` as the number of valid partitions of the prefix `A[1 .. i]`.
+  
+- **Transition:**  
+  For each possible ending position `i`, consider all possible starting positions `j` (where `1 ≤ j ≤ i`). If `A[j..i]` is a valid word (i.e., `IW(A[j..i])` returns true), then add the number of partitions ending at `j-1` (`dp[j-1]`) to `dp[i]`.
+  
+- **Handling Two Strings:**  
+  For variants (b) and (c), a similar approach is used, but you must ensure that the substring from both `A` and `B` (using the same indices) are valid words. This may involve a combined check:  
+  ```python
+  if IW(A[j..i]) and IW(B[j..i]):
+      # update dp accordingly
+
 ---
 ## 3. Complexity analysis
 ### (a) count_partitions(A)
