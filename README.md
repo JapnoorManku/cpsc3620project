@@ -9,7 +9,7 @@ This repository provides **Dynamic Programming (DP)** solutions for three varian
 We assume access to a function `IsWord(s)`, which checks whether a given substring `s` is a valid word.
 
 ---
-##2. Problem Statement
+## 2. Problem Statement
 
 Assume you have a subroutine `IW` that takes an array (or substring) of characters as input and returns `T` (true) if and only if that string is a valid word. Using this subroutine, we address the following three variants:
 
